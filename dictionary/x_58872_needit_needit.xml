@@ -1,5 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
     <element audit="true" db_object_id="55d7c67ec36711101b26753ce001312a" extends="task" label="NeedIt" max_length="40" name="x_58872_needit_needit" type="collection">
+        <element attributes="encode_utf8=false" label="Change Request" max_length="32" name="u_change_request" reference="change_request" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Department" max_length="40" name="u_department" type="string">
+            <choice>
+                <element inactive_on_update="false" label="HD" sequence="0" value="hd"/>
+                <element inactive_on_update="false" label="Legal" sequence="1" value="legal"/>
+                <element inactive_on_update="false" label="Facilities" sequence="2" value="facilities"/>
+            </choice>
+        </element>
+        <element label="Email" max_length="40" name="u_email" type="email"/>
+        <element attributes="edge_encryption_enabled=true" choice="3" default="1" label="impact" max_length="40" name="u_impact" type="string">
+            <choice>
+                <element inactive_on_update="false" label="1 - High" sequence="0" value="1"/>
+                <element inactive_on_update="false" label="2 - Medium" sequence="1" value="2"/>
+                <element inactive_on_update="false" label="3 - Low" sequence="2" value="3"/>
+            </choice>
+        </element>
+        <element attributes="encode_utf8=false" label="incident" max_length="32" name="u_incident_1" reference="incident" type="reference"/>
+        <element choice="3" default="1" label="Priority" max_length="40" name="u_priority" type="integer">
+            <choice>
+                <element inactive_on_update="false" label="1 - Critical" sequence="0" value="1"/>
+                <element inactive_on_update="false" label="2 - High" sequence="1" value="2"/>
+                <element inactive_on_update="false" label="3 - Moderate" sequence="2" value="3"/>
+                <element inactive_on_update="false" label="4 - Low" sequence="3" value="4"/>
+                <element inactive_on_update="false" label="5 - Planning" sequence="4" value="5"/>
+            </choice>
+        </element>
+        <element attributes="encode_utf8=false" label="Problem" max_length="32" name="u_problem_1" reference="problem" type="reference"/>
         <element attributes="encode_utf8=false" label="Requested for" mandatory="true" max_length="32" name="u_requested_for" reference="sys_user" type="reference"/>
         <element attributes="edge_encryption_enabled=true" choice="3" default="legal" label="Request type" mandatory="true" max_length="40" name="u_request_type" type="string">
             <choice>
@@ -7,6 +34,40 @@
                 <element inactive_on_update="false" label="Facilities" sequence="1" value="facilities"/>
                 <element inactive_on_update="false" label="Legal" sequence="2" value="legal"/>
                 <element inactive_on_update="false" label="Your Department Choice" sequence="3" value="your_choice"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true" choice="1" dependent="u_request_type" dependent_on_field="u_request_type" label="sub department" max_length="40" name="u_sub_dept" type="string" use_dependent_field="true">
+            <choice>
+                <element inactive_on_update="false" label="Choice 1" sequence="0" value="Choice 1"/>
+                <element dependent_value="facilities" inactive_on_update="false" label="House Keeping" sequence="0" value="House Keeping"/>
+                <element dependent_value="hr" inactive_on_update="false" label="On Boarding" sequence="0" value="On Boarding"/>
+                <element dependent_value="legal" inactive_on_update="false" label="Paper Work" sequence="0" value="Paper Work"/>
+                <element inactive_on_update="false" label="Choice 2" sequence="1" value="Choice 2"/>
+                <element dependent_value="legal" inactive_on_update="false" label="Investigation" sequence="1" value="Investigation"/>
+                <element dependent_value="facilities" inactive_on_update="false" label="Library" sequence="1" value="Library"/>
+                <element dependent_value="hr" inactive_on_update="false" label="Off Boarding" sequence="1" value="Off Boarding"/>
+                <element inactive_on_update="false" label="Choice 3" sequence="2" value="Choice 3"/>
+                <element dependent_value="legal" inactive_on_update="false" label="Complaints" sequence="2" value="Complaints"/>
+                <element dependent_value="facilities" inactive_on_update="false" label="Stationary" sequence="2" value="Stationary"/>
+                <element dependent_value="hr" inactive_on_update="false" label="transfer" sequence="2" value="transfer"/>
+                <element dependent_value="legal" inactive_on_update="false" label="Disciplinary board" sequence="3" value="Disciplinary board"/>
+                <element dependent_value="facilities" inactive_on_update="false" label="Reception" sequence="3" value="Reception"/>
+                <element dependent_value="hr" inactive_on_update="false" label="Sabaticals" sequence="3" value="Sabaticals"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true" choice="3" default="awaiting_moderation" label="Sub Status" max_length="40" name="u_sub_status" type="string">
+            <choice>
+                <element inactive_on_update="false" label="Awaiting moderation" sequence="0" value="awaiting_moderation"/>
+                <element inactive_on_update="false" label="Customer Action" sequence="1" value="customer_action"/>
+                <element inactive_on_update="false" label="need info" sequence="2" value="need_info"/>
+                <element inactive_on_update="false" label="Hardware Requested" sequence="3" value="hardware_request"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Urgency" max_length="40" name="u_urgency" type="string">
+            <choice>
+                <element inactive_on_update="false" label="1 - High" sequence="0" value="1"/>
+                <element inactive_on_update="false" label="2 - Medium" sequence="1" value="2"/>
+                <element inactive_on_update="false" label="3 - Low" sequence="2" value="3"/>
             </choice>
         </element>
         <element attributes="edge_encryption_enabled=true" choice="3" default="legal1" label="What needed" mandatory="true" max_length="40" name="u_what_needed" type="string">
